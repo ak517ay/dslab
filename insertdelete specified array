@@ -1,0 +1,61 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+void insert(int a[1000],int n){
+     printf("enter elements");
+     for(int i =0;i<n;i++){
+         scanf("%d",&a[i]);
+     }
+}
+     void display(int a[100],int n){
+         for(int i =0;i<n-1;i++){
+         printf("%d",a[i]);
+     }
+     }
+     void insertvalid(int a[1000],int n,int m){
+         int elem,c;
+         printf("enter the element u want to insert at the specified position");
+         scanf("%d",&elem);
+         for(int i=n-1;i>=0;i--){
+              a[i+1]=a[i];
+             if(i==m){
+                 a[i]=elem;
+                 break;
+             }
+            
+         }
+     }
+     void deletevalid(int a[1000],int n,int m){
+         for(int i=m;i<n;i++){
+             a[i]=a[i+1];
+             if(i+1==n)
+             break;
+         }
+     }
+     int main(){
+         while(1){
+         int n,a[1000],ch,m;
+         printf("enter 1 for insertion 2 for display");
+         scanf("%d",&ch);
+         switch(ch){
+             case 1:{
+             printf("enter no of terms");
+             scanf("%d",&n);
+             insert(a,n);
+             break;
+             
+         }
+         case 2:
+         display(a,n);
+         case 3:
+         printf("enter the spec");
+         scanf("%d",&m);
+         insertvalid(a,n,m);
+         break;
+         case 4:
+         printf("enter the spec");
+         scanf("%d",&m);
+         deletevalid(a,n,m);
+     }
+}
+}
+
