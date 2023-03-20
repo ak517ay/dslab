@@ -1,0 +1,95 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int info;
+    struct node*llink;
+    struct node*rlink;
+};
+typedef struct node* NODE;
+NODE getnode(){
+    NODE x;
+    x=(NODE)malloc(sizeof(struct node));
+    if(x==NULL)
+    return NULL;
+    else
+    return x;
+}
+NODE bstinsert(NODE root,int elem){
+    NODE temp;
+    temp=getnode();
+    temp->info=elem;
+    temp->rlink=temp->llink=NULL;
+    if(root==NULL){
+        return temp;
+    }
+    NODE cur= root;
+    NODE prev=NULL;
+    while(cur!=NULL){
+        prev=cur;
+        if(elem>cur->info){
+            cur=cur->rlink;
+        }
+        else
+        cur=cur->llink;
+    }
+    if(prev->info>elem){
+        prev->llink=temp;
+        
+    }
+    else
+    prev->rlink=temp;
+}
+NODE preorder(NODE root){
+    if(root==NULL){
+        return;
+}
+printf("%d\n",root->info);
+preorder(root->llink);
+preorder(root->rlink);
+}
+NODE inorder(NODE root){
+    if(root==NULL){
+        return;
+}
+inorder(root->llink);
+printf("%d\n",root->info);
+
+inorder(root->rlink);
+}
+NODE postorder(NODE root){
+    if(root==NULL){
+        return;
+}
+postorder(root->llink);
+
+
+postorder(root->rlink);
+printf("%d\n",root->info);
+}
+
+int main() {
+    NODE root= NULL;
+    int elem;
+    int ch;
+    while(1){
+        printf("1 insert 2 pre 3 post 4 in\n");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:
+            printf("enter element\n");
+            scanf("%d",&elem);
+            root=bstinsert(root,elem);
+            break;
+            case 2:
+            preorder(root);
+            break;
+            case 3:
+            postorder(root);
+            break;
+            case 4:
+            inorder(root);
+            break;
+        }
+    }
+}
