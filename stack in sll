@@ -1,0 +1,73 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+#define max 10
+struct node{
+    int info;
+    struct node * link;
+    
+};
+typedef struct node* NODE;
+NODE getnode(){
+    NODE x;
+    x=(NODE)malloc(sizeof(struct node));
+    if(x==NULL){
+        return NULL;
+    }
+    
+    return x;
+}
+NODE insertf(NODE front ,int elem){
+    NODE cur;
+    cur=front;
+    NODE temp;
+    temp=getnode();
+    temp->info=elem;
+    if(front==NULL){
+        return temp;
+    }
+    temp->link=front;
+    return temp;
+}
+NODE deletef(NODE front){
+    if(front==NULL){
+        printf("noi");
+        return NULL;
+    }
+    NODE cur;
+    cur=front->link;
+    free(front);
+    return cur;
+}
+void display(NODE front){
+    if(front==NULL){
+        printf("noi");
+        return ;
+    }
+    NODE cur=front;
+    while(cur!=NULL){
+        printf("%d\n",cur->info);
+        cur=cur->link;
+    }
+}
+int main(){
+    NODE front;
+    int ch,elem;
+    while(1){
+        printf("1 insert 2 delete 3 display\n");
+        scanf("%d",&ch);
+        switch(ch){
+        case 1:
+        printf("enter \n");
+        scanf("%d",&elem);
+     front=   insertf(front,elem);
+        break;
+        case 3:
+       display(front);
+        break;
+        case 2:
+    front=     deletef(front);
+        
+    }
+}
+}
