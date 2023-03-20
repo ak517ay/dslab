@@ -1,0 +1,54 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+#define max 10
+void push(int s[max],int * top,int elem){
+    if(*top==max-1){
+        printf("max\n");
+        return;
+    }
+    else{
+        s[++(*top)]=elem;
+    }
+}
+void pop(int s[max],int * top){
+    int elem;
+    if(*top==-1){
+        printf("min\n");
+        return;
+    }
+    elem=s[*(top)];
+    
+    printf("%d\n",elem);
+    (*top)--;
+}
+void display(int s[max],int * top)
+{
+     if(*top==-1){
+        printf("min");
+        return;
+    }
+    for(int i=*top;i>=0;i--){
+       printf("%d\n",s[i]);
+    }
+}
+int main(){
+    int s[max],ch,elem,top=-1;
+    while(1){
+        printf("1 for push 2 for pop 3 for display\n");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:
+            printf("enter the element\n");
+            scanf("%d",&elem);
+            push(s,&top,elem);
+            break;
+            case 2:
+            pop(s,&top);
+            break;
+            case 3:
+            display(s,&top);
+            break;
+        }
+    }
+}
