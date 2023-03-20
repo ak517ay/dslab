@@ -1,0 +1,82 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define max 10
+struct node{
+    int exp;
+    char name[10];
+    struct node * llink;
+    struct node * rlink;
+    
+    
+};
+typedef struct node* NODE;
+NODE getnode(){
+    NODE x;
+    x=(NODE)malloc(sizeof(struct node));
+    if(x==NULL){
+        return NULL;
+    }
+    
+    return x;
+}
+NODE insertf(NODE front,int exp,char name[190]){
+    NODE temp;
+    temp=getnode();
+    temp->exp=exp;
+    strcpy(temp->name,name);
+    temp->rlink=temp->llink=NULL;
+    if(front==NULL){
+        return temp;
+    }
+    temp->rlink=front;
+    front->llink=temp;
+    return temp;
+}
+NODE deletef(NODE front){
+    if(front==NULL){
+        return NULL;
+    }
+    NODE cur=front->rlink;
+    free(front);
+    return cur;
+    }
+    void display(NODE front){
+    if(front==NULL){
+        printf("noi");
+        return ;
+    }
+    NODE cur=front;
+    while(cur!=NULL){
+        puts(cur->name);
+        printf("%d\n",cur->exp);
+        cur=cur->rlink;
+    }
+}
+int main()
+{
+    char name[10];
+    int exp;
+    NODE front;
+    int ch;
+    while(1){
+       printf("1 insert 2 delete 3 display\n");
+       scanf("%d",&ch);
+        switch(ch){
+        case 1:
+        printf("enter name exp \n");
+        scanf("%s",name);
+        scanf("%d",&exp);
+       front = insertf(front,exp,name);
+        break;
+        case 2:
+        front = deletef(front);
+        break;
+        case 3:
+        display(front);
+        break;
+        
+    }
+}
+}
