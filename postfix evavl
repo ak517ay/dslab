@@ -1,0 +1,63 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+#include <ctype.h>
+void push(int s[10],int * top,int elem){
+    if(*top==9){
+        printf("over");
+        return;
+    }
+    (*top)++;
+        s[(*top)]=elem;
+        
+    }
+    int pop(int s[10],int * top){
+        if(*top==-1){
+            printf("under");
+            return;
+        }
+        int e=s[*top];
+       
+        (*top)--;
+         return e;
+    }
+    void display(int s[10],int * top){
+        for(int i=*top;i>=0;i--){
+            printf("%d",s[i]);
+        }
+    }
+int compute(int a,char s,int b ){
+    switch(s){
+        case '+':
+        return a+b;
+        case '-':
+        return a-b;
+        case '*':
+        return a*b;
+    }
+}
+int solve(char post[]){
+    char sy;
+    int s[10],top=-1;
+    int op2,op1,res=0;
+    for(int i=0;post[i]!='\0';i++){
+        sy=post[i];
+        if(isdigit(sy)){
+            push(s,&top,sy-'0');
+        }
+        else{
+        op2=pop(s,&top);
+        op1=pop(s,&top);
+        res=compute(op1,sy,op2);
+        push(s,&top,res);
+    }
+    }
+    return pop(s,&top);
+}
+int main(){
+    char post[10];
+    printf("enter \n");
+    scanf("%s",post);
+   int res= solve(post);
+   printf("%d",res);
+}
